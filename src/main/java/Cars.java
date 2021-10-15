@@ -19,18 +19,21 @@ public class Cars{
     }
 
     private String age;
+    private String name;
     private float price;
 
-    public Cars(String age, float price) {
+    public Cars(String name,String age, float price) {
+        this.name = name;
         this.age = age;
         this.price = price;
     }
 
     @Override
     public String toString() {
-        return "Cars{" +
-                "age='" + age + '\'' +
-                ", price=" + price +
+        return "Cars {" +
+                "name = '" + name + '\'' +
+                " age = '" + age + '\'' +
+                ", price = " + price +
                 '}';
     }
 }

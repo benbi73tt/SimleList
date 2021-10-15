@@ -18,7 +18,6 @@ public class ListOperation<T> implements SimpleList<T> {
 
     @Override
     public void add(T item) {
-        //System.out.println(this.getColor() + size + " is added " );
         rainbow[size] = item;
         size++;
     }
@@ -36,10 +35,11 @@ public class ListOperation<T> implements SimpleList<T> {
             System.arraycopy(rainbow, index+1, rainbow, index, size()-index-1);
             rainbow[size()-1] = null;
             size--;
+            System.gc();
 
         }
-
     }
+
     public String toString(){
         return "ListOperation {"+
                 "Name = '"+ name + '\'' +
@@ -60,11 +60,6 @@ public class ListOperation<T> implements SimpleList<T> {
     @Override
     public int size() {
         return size;
-    }
-
-    @Override
-    public void addAll(SimpleList<T> list) {
-
     }
 
     @Override
@@ -95,7 +90,27 @@ public class ListOperation<T> implements SimpleList<T> {
 
     @Override
     public boolean contains(T item) {
-        return false;
+        boolean res = false;
+        for(int i = 0; i < size; i++){
+            if(item.equals(rainbow[i])){
+                res = true;
+                break;
+            }
+        }
+
+//todo        for(T x : rainbow){
+//            if (x == null) return false;
+//            if(x.equals(item)) {
+//                return true;
+//            }
+//        }
+        return res;
+    }
+
+    @Override
+    public void addAll(SimpleList<T> list) {
+        for(int i = 0; i<list.size();i++)
+        add(list.get(i).get());
     }
 
     @Override

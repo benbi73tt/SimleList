@@ -5,7 +5,6 @@ public interface SimpleList<T> {
 
     void add(T item);
     void insert(int index, T item) throws Exception;
-
     void remove(int index) throws Exception;
     Optional<T> get(int index);
     int size();
@@ -16,4 +15,5 @@ public interface SimpleList<T> {
     boolean isEmpty();
     SimpleList<T> shuffle();
     SimpleList<T> sort(Comparator<T> comparator);
+
 }
