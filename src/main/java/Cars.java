@@ -40,4 +40,9 @@ public class Cars{
                 ", price = " + price +
                 '}';
     }
+
+//    public String compareTo(Cars o){
+//
+//
+//    }
 }

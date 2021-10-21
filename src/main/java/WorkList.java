@@ -2,7 +2,7 @@ import java.util.*;
 
 public class WorkList {
 
-    public static void print(SimpleList car){
+    public static void print(SimpleList car) throws ArrayIndexOutOfBoundsException {
         for(int i = 0; i< car.size();i++){
             System.out.println(car.get(i));
         }
@@ -51,9 +51,9 @@ public class WorkList {
         //System.out.println(toyota.size());
         print(toyota);
          SimpleList shufToyouta = toyota.shuffle();
-        System.out.println("shufToyouta: ");
+        System.out.println(shufToyouta);
          print(shufToyouta);
-        System.out.println("Toyouta: ");
+        System.out.println(toyota);
 
          print(toyota);
         //print(shufToyouta);
@@ -68,11 +68,27 @@ public class WorkList {
         print(toyota);
         toyota.sort(comparator);
         print(toyota);
+        Comparator<Cars> comparator1 = Comparator.comparing(obg->obg.getAge());
+        SimpleList sortSkoda = skoda.sort(comparator1);
+        print(skoda);
+        print(sortSkoda);
+
+        //skoda.insert(25,camry);
+        SimpleList newCar =  new ListOperation();
+
+
+        newCar.add(camry);
+
+       System.out.println(newCar);
+        System.out.println(newCar.get(0));
+
+
         SimpleList sortToyouta = toyota.sort(comparator);
         System.out.println(sortToyouta);
         print(sortToyouta);
         System.out.println(toyota);
         print(toyota);
+
     }
 
 }
