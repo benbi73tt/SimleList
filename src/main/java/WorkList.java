@@ -13,7 +13,7 @@ public class WorkList {
 
         SimpleList skoda = new ListOperation("Skoda", 5, Cars.class);
         SimpleList toyota = new ListOperation("Toyota", 10, Cars.class);
-        ListOperation test = new ListOperation();
+        SimpleList test = new ListOperation();
 
         Cars octavia = new Cars("Octavia","2018",1.7f);
         Cars rapid = new Cars("Rapid","2015",0.7f);
