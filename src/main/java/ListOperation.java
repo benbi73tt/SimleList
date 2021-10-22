@@ -42,10 +42,8 @@ public class ListOperation<T> implements SimpleList<T> {
         assignmentClass(item);
         if (arr.length <= size) {
             exten();
-            arr[size] = item;
-        } else {
-            arr[size] = item;
         }
+        arr[size] = item;
         size++;
     }
 
