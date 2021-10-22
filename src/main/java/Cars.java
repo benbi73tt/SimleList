@@ -1,4 +1,5 @@
 public class Cars{
+
     public String getAge() {
         return age;
     }
@@ -15,18 +16,17 @@ public class Cars{
         this.price = price;
     }
 
-    private String age;
-
     public String getName() { return name;}
 
     public void setName(String name) {
         this.name = name;
     }
 
+    private String age;
     private String name;
     private float price;
 
-    public Cars(String name,String age, float price) {
+    public Cars(String name, String age, float price) {
         this.name = name;
         this.age = age;
         this.price = price;
@@ -40,9 +40,4 @@ public class Cars{
                 ", price = " + price +
                 '}';
     }
-
-//    public String compareTo(Cars o){
-//
-//
-//    }
 }

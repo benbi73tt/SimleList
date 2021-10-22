@@ -23,7 +23,6 @@ public class ListOperation<T> implements SimpleList<T> {
         if (arr.length == 0){
             this.clazzT = item.getClass();
         }
-
     }
 
     public void exten(int count){
