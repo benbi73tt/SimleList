@@ -8,33 +8,27 @@ public class ListOperation<T> implements SimpleList<T> {
     private int size;
     private Class<?> clazzT;
 
-    public ListOperation(String name,int maxSize, Class<T> clazz){
-        this.clazzT = clazz;
-        this.arr = (T[]) Array.newInstance(clazzT, maxSize);
+    public ListOperation(String name,int maxSize){
+        this.arr = (T[]) new Object[maxSize];
         this.name = name;
     }
 
     public ListOperation() {
-        this.clazzT = getClass();
-        this.arr = (T[]) Array.newInstance( clazzT, 0);
 
     }
+
     public void assignmentClass(T item){
-        if (arr.length == 0){
-            this.clazzT = item.getClass();
+        if (arr == null){
+            this.arr = (T[]) new Object[0];
         }
     }
 
     public void exten(int count){
-        T[] bufArr = (T[]) Array.newInstance(clazzT,size + count);
-        System.arraycopy(arr,0, bufArr,0,size());
-        this.arr = bufArr;
+        this.arr = Arrays.copyOf(arr,size + count);
     }
 
     public void exten(){
-        T[] bufArr = (T[]) Array.newInstance(clazzT,(size + 1) * 2);
-        System.arraycopy(arr, 0, bufArr, 0, size());
-        this.arr = bufArr;
+        this.arr = Arrays.copyOf(arr,(size + 1) * 2);
     }
 
     @Override
@@ -66,6 +60,7 @@ public class ListOperation<T> implements SimpleList<T> {
     public void remove(int index) throws ArrayIndexOutOfBoundsException{
         if (index > -1 && index < size()){
             System.arraycopy(arr, index+1, arr, index, size() - index - 1);
+//todo      swap(arr,size() - 1 ,index);
             arr[size()-1] = null;
             size--;
         }
@@ -84,7 +79,7 @@ public class ListOperation<T> implements SimpleList<T> {
 
 
     @Override
-    public Optional<T> get(int index) throws ArrayIndexOutOfBoundsException{
+    public Optional<T> get(int index) throws ArrayIndexOutOfBoundsException, NoEntityException {
         if(index > -1 && index < size())
             return Optional.ofNullable(arr[index]);
         else
@@ -92,71 +87,61 @@ public class ListOperation<T> implements SimpleList<T> {
                     + " не существует, измените значение");
     }
 
+
+    public Optional<T> getNotNull(int index) throws ArrayIndexOutOfBoundsException{
+
+        Optional.ofNullable(arr[index]).orElseThrow(()->new ArrayIndexOutOfBoundsException(
+                "Вызываемого элемента " + index
+                        + " не существует, измените значение"));
+        return Optional.of(arr[index]);
+    }
+
     @Override
     public int size() { return size; }
 
     @Override
-    public int first(T item) {
-        int res = 0;
-        for(int i = 0; i < size; i++) {
-            if (item.equals(arr[i])){
-                res = i;
-                break;
-            }
-            else res = -1;
+    public int first(T item){
+        for(int i = 0; i < size; i++){
+            if(item.equals(arr[i])) return i;
         }
-        return res;
+        return -1;
     }
 
     @Override
     public int last(T item) {
-        int res = 0;
         for(int i = size; i >= 0; i--){
-            if (item.equals(arr[i])){
-                res = i;
-                break;
-            }
-            else res = -1;
+            if (item.equals(arr[i])) return i;
         }
-        return res;
+        return -1;
     }
 
     @Override
     public boolean contains(T item) {
-        boolean res = false;
         for(int i = 0; i < size; i++){
-            if (item.equals(arr[i])){
-                res = true;
-                break;
-            }
+            if (item.equals(arr[i])) return true;
         }
-        return res;
+        return false;
     }
 
     @Override
-    public void addAll(SimpleList<T> list) throws ArrayIndexOutOfBoundsException {
+    public void addAll(SimpleList<T> list) throws ArrayIndexOutOfBoundsException, NoEntityException {
         exten(list.size());
-        for(int i = 0; i<list.size(); i++)
+        for(int i = 0; i < list.size(); i++)
             add(list.get(i).get());
     }
 
     @Override
-    public boolean isEmpty() {
-        boolean res = true;
-        if(size > 0)
-            res = false;
-        return res;
-    }
+    public boolean isEmpty() { return (size > 0); }
 
     @Override
     public SimpleList<T> shuffle(){
-        SimpleList shuf = new ListOperation("shuf" + name, size, clazzT);
+        SimpleList shuf = new ListOperation("Shuffle" + name, size);
         int[] t = new int[size];
         for(int i = 0; i < size; i++){
             t[i] = i;
         }
         Random rnd = new Random();
-        for(int i = size-1; i > 0; i--){
+        for(int i = size - 1; i > 0; i--){
             int j = rnd.nextInt(i);
             int k = t[i];
             t[i] = t[j];
@@ -210,7 +195,7 @@ public class ListOperation<T> implements SimpleList<T> {
 
     @Override
     public SimpleList<T> sort(Comparator<T> comparator) {
-        ListOperation sortin = new ListOperation("Sorting" + name, size, clazzT);
+        ListOperation sortin = new ListOperation("Sorting" + name, size);
         T[] temporaryArray = Arrays.copyOf(arr,size);
         temporaryArray = quickSort(temporaryArray, 0 ,size - 1,comparator);
         for( int i = 0; i < size; i++){
@@ -219,53 +204,4 @@ public class ListOperation<T> implements SimpleList<T> {
         return sortin;
     }
 }
-
-//todo    public void swap(int[] x, int a, int b) {
-//        int t = x[a];
-//        x[a] = x[b];
-//        x[b] = t;
-//    }
-//
-//todo    public int[] quickSort(int[] t, int low, int high, Comparator<T> comparator){
-//        if (size == 0)
-//            return t;
-//        if (low >= high)
-//            return t;
-//        int middle = low + (high - low) / 2;
-//        T opora = arr[t[middle]];
-//        int i = low, j = high;
-//        while (i <= j) {
-//            while (comparator.compare(opora, arr[t[i]]) == 1 ) {
-//                i++;
-//            }
-//            while (comparator.compare(opora, arr[t[j]]) == -1 ) {
-//                j--;
-//            }
-//            if (i <= j) {
-//                swap(t,i,j);
-//                i++;
-//                j--;
-//            }
-//        }
-//        if (low < j)
-//            quickSort(t, low, j, comparator);
-//        if (high > i)
-//            quickSort(t ,i, high, comparator);
-//        return t;
-//    }
-//
-//todo    @Override
-//    public SimpleList<T> sort(Comparator<T> comparator) {
-//        SimpleList sortin = new ListOperation("Sorting" + name, size, clazzT);
-//        int[] t = new int[size];
-//        for(int i = 0; i<size; i++){
-//            t[i]=i;
-//        }
-//        t = quickSort(t,0, size-1, comparator);
-//        for (int i = 0; i<size();i++){
-//            sortin.add(arr[t[i]]);
-//        }
-//        return sortin;
-//    }
-// }
 

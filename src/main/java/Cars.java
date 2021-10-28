@@ -38,6 +38,6 @@ public class Cars{
                 "name = '" + name + '\'' +
                 " age = '" + age + '\'' +
                 ", price = " + price +
-                '}';
+                "}";
     }
 }

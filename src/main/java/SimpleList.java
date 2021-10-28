@@ -6,9 +6,9 @@ public interface SimpleList<T> {
     void add(T item);
     void insert(int index, T item) throws Exception;
     void remove(int index) throws Exception;
-    Optional<T> get(int index) throws ArrayIndexOutOfBoundsException;
+    Optional<T> get(int index) throws ArrayIndexOutOfBoundsException, NoEntityException;
     int size();
-    void addAll(SimpleList<T> list) throws ArrayIndexOutOfBoundsException;
+    void addAll(SimpleList<T> list) throws ArrayIndexOutOfBoundsException, NoEntityException;
     int first(T item);
     int last(T item);
     boolean contains(T item);

@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class WorkList {
 
-    public static void print(SimpleList car) throws ArrayIndexOutOfBoundsException {
+    public static void print(SimpleList car) throws ArrayIndexOutOfBoundsException, NoEntityException {
         for(int i = 0; i< car.size();i++){
             System.out.println(car.get(i));
         }
@@ -11,8 +12,8 @@ public class WorkList {
 
     public static void main(String[] args) throws Exception {
 
-        SimpleList skoda = new ListOperation("Skoda", 5, Cars.class);
-        SimpleList toyota = new ListOperation("Toyota", 10, Cars.class);
+        SimpleList skoda = new ListOperation("Skoda", 5);
+        SimpleList toyota = new ListOperation("Toyota", 10);
         SimpleList test = new ListOperation();
 
         Cars octavia = new Cars("Octavia","2018",1.7f);
@@ -22,6 +23,22 @@ public class WorkList {
         Cars superb = new Cars("Superb","2021",3.1f);
         Cars camry = new Cars("Camry","2015",1f);
         Cars corolla = new Cars("Corolla","2020",1.5f);
+
+        System.out.println(test.size());
+        test.add(camry);
+        System.out.println(test.size());
+        print(test);
+        test.add(camry);
+        test.add(camry);
+        test.add(null);
+        test.add(camry);
+
+        System.out.println(test.size());
+        print(test);
+
+        List car = new ArrayList();
+        car.contains(camry);
+        car.add(superb);
     }
 }
 
