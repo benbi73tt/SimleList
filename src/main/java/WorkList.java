@@ -16,6 +16,11 @@ public class WorkList {
         SimpleList toyota = new ListOperation("Toyota", 10);
         SimpleList test = new ListOperation();
 
+        List testArray = new ArrayList();
+        List testArray2 = new ArrayList();
+
+
+
         Cars octavia = new Cars("Octavia","2018",1.7f);
         Cars rapid = new Cars("Rapid","2015",0.7f);
         Cars karoq = new Cars("Karoq","2019",2f);
@@ -39,6 +44,16 @@ public class WorkList {
         List car = new ArrayList();
         car.contains(camry);
         car.add(superb);
+
+        testArray.add(camry);
+
+        testArray.contains(corolla);
+
+        testArray2.add(camry);
+        testArray2.add(octavia);
+        testArray2.add(rapid);
+
+        testArray.addAll(testArray2);
     }
 }
 

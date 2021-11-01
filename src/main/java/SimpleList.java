@@ -3,7 +3,7 @@ import java.util.Optional;
 
 public interface SimpleList<T> {
 
-    void add(T item);
+    void add(T item) throws NoEntityException;
     void insert(int index, T item) throws Exception;
     void remove(int index) throws Exception;
     Optional<T> get(int index) throws ArrayIndexOutOfBoundsException, NoEntityException;
@@ -13,7 +13,7 @@ public interface SimpleList<T> {
     int last(T item);
     boolean contains(T item);
     boolean isEmpty();
-    SimpleList<T> shuffle();
-    SimpleList<T> sort(Comparator<T> comparator);
+    SimpleList<T> shuffle() throws NoEntityException;
+    SimpleList<T> sort(Comparator<T> comparator) throws NoEntityException;
 
 }
