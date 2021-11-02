@@ -41,27 +41,8 @@ public class ListOperationTest {
         test.add(superb);
         test.add(camry);
         test.add(corolla);
-
-
     }
 
-    @Test
-    public void getAllUsers_NO_NULL() throws NoEntityException {
-        test.add(octavia);
-        System.out.println(test.size());
-        System.out.println(test);
-        Assert.assertNotNull(test);
-    }
-
-
-    @Test
-    public void exten() {
-
-    }
-
-    @Test
-    public void testExten() {
-    }
 
     @Test
     public void add() throws ArrayIndexOutOfBoundsException, NoEntityException {
@@ -69,7 +50,7 @@ public class ListOperationTest {
         test2.add(octavia);
         test2.add(karoq);
         test2.add(rapid);
-        test2.add(null);
+        //todo test2.add(null);
 
 
         List<Cars> actual = new ArrayList<>();
@@ -87,8 +68,8 @@ public class ListOperationTest {
 
     @Test
     public void insert() throws Exception {
-        test.insert(13, camry);
-        Assert.assertEquals(test.get(13).get(), camry);
+        test.insert(5, camry);
+        Assert.assertEquals(test.get(5).get(), camry);
     }
 
     @Test
@@ -101,8 +82,7 @@ public class ListOperationTest {
     public void remove() throws Exception {
         Object buf = test.get(6).get();
         test.remove(5);
-        System.out.println(buf);
-        Assert.assertEquals(69, test.size());
+        Assert.assertEquals(6, test.size());
         Assert.assertEquals(test.get(5).get(), buf);
     }
 
@@ -111,7 +91,6 @@ public class ListOperationTest {
         System.out.println(testNull.size());
         testNull.add(camry);
         testNull.remove(0);
-
     }
 
     @Test
@@ -123,26 +102,21 @@ public class ListOperationTest {
 
     @Test
     public void size() throws Exception {
-
-        Assert.assertEquals(test.size(), 70);
-
+        Assert.assertEquals(test.size(), 7);
         SimpleList test2 = new ListOperation();
+
         test2.add(karoq);
         test2.add(octavia);
         Assert.assertEquals(test2.size(), 2);
 
         test.addAll(test2);
-
-        Assert.assertEquals(test.size(), 72);
+        Assert.assertEquals(test.size(), 9);
 
         test.remove(3);
-
-        Assert.assertEquals(test.size(), 71);
+        Assert.assertEquals(test.size(), 8);
 
         test.insert(0, octavia);
-
-
-        Assert.assertEquals(test.size(), 72);
+        Assert.assertEquals(test.size(), 9);
     }
 
 
@@ -155,7 +129,7 @@ public class ListOperationTest {
     @Test
     public void last() {
         Assert.assertTrue(test.last(vesta) == -1 ? true : false);
-        Assert.assertEquals(test.last(camry), 68);
+        Assert.assertEquals(test.last(camry), 5);
     }
 
     @Test
