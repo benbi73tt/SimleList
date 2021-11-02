@@ -1,3 +1,5 @@
+package ru.madbrains.simpleList;
+
 public class Cars{
 
     public String getAge() {
@@ -41,3 +43,4 @@ public class Cars{
                 "}";
     }
 }
+

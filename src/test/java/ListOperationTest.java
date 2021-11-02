@@ -1,6 +1,11 @@
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ru.madbrains.simpleList.ArrayIndexOutOfBoundsException;
+import ru.madbrains.simpleList.NoEntityException;
+import ru.madbrains.simpleList.Cars;
+import ru.madbrains.simpleList.SimpleList;
+import ru.madbrains.simpleList.ListOperation;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -218,8 +223,5 @@ public class ListOperationTest {
             Assert.assertEquals(sortAge.get(i), sortTestAge.get(i));
             Assert.assertEquals(sortName.get(i), sortTestName.get(i));
         }
-
     }
-
-
 }

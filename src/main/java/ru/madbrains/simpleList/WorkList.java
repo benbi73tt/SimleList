@@ -1,3 +1,8 @@
+package ru.madbrains.simpleList;
+
+import ru.madbrains.simpleList.ArrayIndexOutOfBoundsException;
+import ru.madbrains.simpleList.SimpleList;
+
 import java.util.ArrayList;
 import java.util.List;
 
