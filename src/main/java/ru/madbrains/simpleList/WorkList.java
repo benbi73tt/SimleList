@@ -40,7 +40,7 @@ public class WorkList {
         print(test);
         test.add(camry);
         test.add(camry);
-        test.add(null);
+        //test.add(null);
         test.add(camry);
 
         System.out.println(test.size());
