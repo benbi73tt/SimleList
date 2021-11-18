@@ -1,6 +1,6 @@
 package ru.madbrains.simpleList;
 
-public class Cars{
+public class Car {
 
     public String getAge() {
         return age;
@@ -28,7 +28,7 @@ public class Cars{
     private String name;
     private float price;
 
-    public Cars(String name, String age, float price) {
+    public Car(String name, String age, float price) {
         this.name = name;
         this.age = age;
         this.price = price;

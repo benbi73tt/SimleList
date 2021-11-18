@@ -1,6 +1,5 @@
-ru\madbrains\simpleList\Cars.class
 ru\madbrains\simpleList\SimpleList.class
 ru\madbrains\simpleList\ArrayIndexOutOfBoundsException.class
-ru\madbrains\simpleList\WorkList.class
+ru\madbrains\simpleList\Car.class
 ru\madbrains\simpleList\ListOperation.class
 ru\madbrains\simpleList\NoEntityException.class
