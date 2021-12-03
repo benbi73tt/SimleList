@@ -1,6 +1,12 @@
 package ru.madbrains.simpleList;
 
 import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.*;
+import java.util.stream.IntStream;
 
 public class ListOperation<T> implements SimpleList<T> {
 
@@ -167,6 +173,7 @@ public class ListOperation<T> implements SimpleList<T> {
         return shuf;
     }
 
+
     public void swap(T[] x, int a, int b) {
         T t = x[a];
         x[a] = x[b];
@@ -208,18 +215,90 @@ public class ListOperation<T> implements SimpleList<T> {
     }
 
     @Override
-    public SimpleList<T> sort(Comparator<T> comparator) throws NoEntityException {
+    public SimpleList<T> sort(Comparator<T> comparator) throws NoEntityException, ExecutionException, InterruptedException {
+        if (size < 2) {
+            throw new NoEntityException("Количество элементов недостаточно");
+        }
+
+
+        ListOperation sortin = new ListOperation("Sorting" + name, size);
+        T[] temporaryArray = Arrays.copyOf(arr, size);
+
+        Callable task = () -> quickSort(temporaryArray, 0, size - 1, comparator);
+
+        FutureTask<T[]> future = new FutureTask<>(task);
+
+        Thread thread1 = new Thread(future);
+        thread1.start();
+
+        T[] temp = future.get();
+
+        for (int i = 0; i < size; i++) {
+            sortin.add(temp[i]);
+        }
+        return sortin;
+    }
+
+
+    public T[] bubbleSort(T[] buf, Comparator<T> comparator) throws InterruptedException {
+        final boolean[] sorted = {false};
+        Runnable task = () -> {
+            {
+                for (int i = 0; i < buf.length - 1; i++) {
+                    if (comparator.compare(buf[i], buf[i + 1]) > 0) {
+                        swap(buf, i, i + 1);
+                        sorted[0] = false;
+                    }
+                }
+            }
+        };
+        Runnable task2 = () -> {
+            {
+                for (int i = buf.length - 1; i > 0; i--) {
+                    if (comparator.compare(buf[i], buf[i - 1]) < 0) {
+                        swap(buf, i, i - 1);
+                        sorted[0] = false;
+                    }
+                }
+            }
+        };
+        while (!sorted[0]) {
+            sorted[0] = true;
+            Thread thread = new Thread(task);
+            Thread thread2 = new Thread(task2);
+            Thread thread3 = new Thread(task2);
+            thread.start();
+            thread2.start();
+            thread3.start();
+
+
+
+            thread.join();
+            thread2.join();
+            thread3.join();
+        }
+
+        return buf;
+    }
+
+
+    @Override
+    public SimpleList<T> sortingThreads(Comparator<T> comparator) throws NoEntityException,InterruptedException {
         if (size < 2) {
             throw new NoEntityException("Количество элементов недостаточно");
         }
         ListOperation sortin = new ListOperation("Sorting" + name, size);
         T[] temporaryArray = Arrays.copyOf(arr, size);
-        temporaryArray = quickSort(temporaryArray, 0, size - 1, comparator);
+        temporaryArray = bubbleSort(temporaryArray, comparator);
+
+
+
         for (int i = 0; i < size; i++) {
             sortin.add(temporaryArray[i]);
         }
         return sortin;
     }
 }
+
 
 
