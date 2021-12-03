@@ -220,7 +220,6 @@ public class ListOperation<T> implements SimpleList<T> {
             throw new NoEntityException("Количество элементов недостаточно");
         }
 
-
         ListOperation sortin = new ListOperation("Sorting" + name, size);
         T[] temporaryArray = Arrays.copyOf(arr, size);
 
