@@ -17,7 +17,7 @@ public interface SimpleList<T> {
     boolean contains(T item);
     boolean isEmpty();
     SimpleList<T> shuffle() throws NoEntityException;
-    SimpleList<T> sortingThreads(Comparator<T> comparator) throws NoEntityException, ExecutionException, InterruptedException;
+    SimpleList<T> sortingThreads(Comparator<T> comparator) throws NoEntityException, InterruptedException;
     SimpleList<T> sort(Comparator<T> comparator) throws NoEntityException, ExecutionException, InterruptedException;
 
 }
